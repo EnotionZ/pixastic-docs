@@ -56,7 +56,7 @@ $(document).ready(function(){
 <input type="button" onclick="demo();" value="Pointillize"/>
 <input type="button" onclick="resetDemo();" value="Reset"/><br/>
 </div>
-<img src="/sample/Wildebeest.jpg" id="demoimage" style="margin-top:5px;" alt=""/>
+<img src="{{ root_url }}/sample/Wildebeest.jpg" id="demoimage" style="margin-top:5px;" alt=""/>
 </div></div>
 	<div id="tabexamplecode">
 		<h3>Example usage</h3><div class="code"><pre class="javascript">
@@ -127,7 +127,7 @@ for (var i=0;i<clients.length;i++) {
 	Pixastic.Client = client;
 	if (action.checkSupport()) {
 		document.write(
-			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+				"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"{{ root_url }}/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
 			+ client.name + "</a></span>"
 		);
 	}

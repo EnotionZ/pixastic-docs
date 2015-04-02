@@ -71,11 +71,11 @@ Mode:
 
 <br/>
 Blend image:<br/>
-<img src="/sample/Flower.jpg" id="blendimage" style="margin-top:5px;width:150px;" alt=""/>
+<img src="{{ root_url }}/sample/Flower.jpg" id="blendimage" style="margin-top:5px;width:150px;" alt=""/>
 
 </div>
 
-<img src="/sample/Butterfly.jpg" id="demoimage" style="margin-top:5px;" alt=""/></div></div>
+<img src="{{ root_url }}/sample/Butterfly.jpg" id="demoimage" style="margin-top:5px;" alt=""/></div></div>
 	<div id="tabexamplecode">
 		<h3>Example usage</h3><div class="code"><pre class="javascript">
 var img = new Image();
@@ -97,7 +97,7 @@ img.src = "myimage.jpg";
 	<div id="tabparameters">
 		<h3>Parameters</h3><ul class="action-options-list"><li><span class='option-desc'><span class='option-name'>amount</span> (<span class='option-type'>float</span>)<br/>Amount of the image to blend. Value between 0 and 1.</span></li><li><span class='option-desc'><span class='option-name'>mode</span> (<span class='option-type'>string</span>)<br/>The blend mode. One of "normal", "multiply", "lighten", "darken", "lightercolor", "darkercolor", "difference", "screen", "exclusion", "overlay", "softlight", "hardlight", "colordodge", "colorburn", "lineardodge", "linearburn", "linearlight", "vividlight", "pinlight", "hardmix".</span></li><li><span class='option-desc'><span class='option-name'>image</span> (<span class='option-type'>image</span>)<br/>Image element to blend with original image.</span></li></ul>	</div></div>
 
-<p class="view-source">View source: <a href="/web/20140701115210/http://www.pixastic.com/lib/git/pixastic/actions/blend.js" class="view-source-link">blend.js</a></p>
+<p class="view-source">View source: <a href="/lib/git/pixastic/actions/blend.js" class="view-source-link">blend.js</a></p>
 
 <h3>Browser support</h3>
 <p>
@@ -154,7 +154,7 @@ for (var i=0;i<clients.length;i++) {
 	Pixastic.Client = client;
 	if (action.checkSupport()) {
 		document.write(
-			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+		"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"{{ root_url }}/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
 			+ client.name + "</a></span>"
 		);
 	}

@@ -34,7 +34,7 @@ function demo() {
 <input type="button" onclick="addNoise();" value="Add noise"/>
 <input type="button" onclick="demo();" value="Remove noise"/>
 <input type="button" onclick="resetDemo();" value="Reset"/><br/>
-<img src="/sample/Flower.jpg" id="demoimage" alt=""/>
+<img src="{{ root_url }}/sample/Flower.jpg" id="demoimage" alt=""/>
 </div></div>
 	<div id="tabexamplecode">
 		<h3>Example usage</h3><div class="code"><pre class="javascript">
@@ -105,7 +105,7 @@ for (var i=0;i<clients.length;i++) {
 	Pixastic.Client = client;
 	if (action.checkSupport()) {
 		document.write(
-			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+				"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"{{ root_url }}/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
 			+ client.name + "</a></span>"
 		);
 	}
