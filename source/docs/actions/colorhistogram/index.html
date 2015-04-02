@@ -1,0 +1,117 @@
+---
+layout: page
+sidebar: false
+---
+
+<h1 class="action-header"><a href="/lib/docs/">Documentation</a>: Color Histogram</h1>
+<h3>Description</h3>
+
+<p class="action-description">This action determines the number of occurences of different color values used in the image, thereby creating a histogram. This action is similar to the "histogram" action, but creates a histogram for each channel, returning 3 arrays, one for each of the R, G and B channels. The histograms will be available in the <code>returnValue</code> object as shown in the example code. You can also choose to have the histograms painted on top of the image by using the <code>paint</code> parameter.</p>
+
+<div id="actiontabs">
+	<ul>
+		<li><a href="#tabdemo"><span>Demo</span></a></li>
+		<li><a href="#tabexamplecode"><span>Example code</span></a></li>
+		<li><a href="#tabparameters"><span>Parameters</span></a></li>	</ul>
+	<div id="tabdemo">
+
+		<h3>Demo</h3><div class="actiondemo">
+<script type="text/javascript"><!--
+var hist = {};
+function demo() {
+	Pixastic.process(document.getElementById("demoimage"), "colorhistogram", {
+		paint:true,returnValue:hist
+	});
+}
+--></script>
+
+<input type="button" onclick="demo();" value="Make histogram"/>
+<input type="button" onclick="resetDemo();" value="Reset"/><br/>
+<img src="/sample/Wildebeest.jpg" id="demoimage" alt=""/><br/>
+</div></div>
+	<div id="tabexamplecode">
+		<h3>Example usage</h3><div class="code"><pre class="javascript">
+var hist = {};	
+var img = new Image();
+img.onload = function() {
+	Pixastic.process(img, "colorhistogram", {
+		paint:true,returnValue:hist
+	});
+	hist.rvals; // <- array[255] red channel
+	hist.gvals; // <- array[255] green channel
+	hist.bvals; // <- array[255] blue channel
+}
+document.body.appendChild(img);
+img.src = "myimage.jpg";
+</pre></div></div>
+	<div id="tabparameters">
+		<h3>Parameters</h3><ul class="action-options-list"><li><span class='option-desc'><span class='option-name'>paint</span> (<span class='option-type'>bool</span>)<br/>If true, the histograms will be painted on the image</span></li><li><span class='option-desc'><span class='option-name'>returnValue</span> (<span class='option-type'>array</span>)<br/>An return value object which will hold the values (in the "values" property) of the histogram after execution.</span></li></ul>	</div></div>
+
+<p class="view-source">View source: <a href="/lib/git/pixastic/actions/colorhistogram.js" class="view-source-link">colorhistogram.js</a></p>
+
+<h3>Browser support</h3>
+<p>
+<script type="text/javascript"><!--
+
+var clients = [
+	{
+		name : "Internet Explorer 5.5+",
+		icon : "icon_ie7.png",
+		link : "http://www.microsoft.com/windows/products/winfamily/ie/default.mspx",
+		hasCanvas : function() { return false },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return true }
+	},
+	{
+		name : "Opera 9+",
+		icon : "icon_opera.png",
+		link : "http://www.opera.com/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { this.name = "Opera 9.5+"; return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Firefox 2+",
+		icon : "icon_firefox.png",
+		link : "http://www.mozilla.com/firefox/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Safari 3+",
+		icon : "icon_safari.png",
+		link : "http://www.apple.com/safari/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return false }
+	},
+	{
+		name : "WebKit Nightly",
+		icon : "icon_webkit.png",
+		link : "http://nightly.webkit.org/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	}
+];
+
+var realClient = Pixastic.Client;
+var action = Pixastic.Actions["colorhistogram"];
+
+for (var i=0;i<clients.length;i++) {
+	var client = clients[i];
+	Pixastic.Client = client;
+	if (action.checkSupport()) {
+		document.write(
+			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+			+ client.name + "</a></span>"
+		);
+	}
+}
+
+Pixastic.Client = realClient;
+
+--></script>
+
+</p>

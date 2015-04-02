@@ -1,0 +1,150 @@
+---
+layout: page
+sidebar: false
+---
+
+<h1 class="action-header"><a href="/lib/docs/">Documentation</a>: Emboss</h1>
+<h3>Description</h3>
+
+<p class="action-description">This creates a simple emboss effect. It is possible vary the brightness of the image and select the direction of the light from a predefined list (top left, top, top right, etc..).</p>
+
+<div id="actiontabs">
+	<ul>
+		<li><a href="#tabdemo"><span>Demo</span></a></li>
+		<li><a href="#tabexamplecode"><span>Example code</span></a></li>
+		<li><a href="#tabparameters"><span>Parameters</span></a></li>	</ul>
+	<div id="tabdemo">
+
+		<h3>Demo</h3><div class="actiondemo">
+<script type="text/javascript">
+function demo() {
+	Pixastic.process(document.getElementById("demoimage"), "emboss", {
+		strength : $("#value-strength").val(),
+		greyLevel : $("#value-greyLevel").val(),
+		direction : $("#value-direction").val(),
+		blend : $("#value-blend").attr("checked")
+	});
+}
+
+</script>
+
+<div class="demo-options">
+
+<div>Strength: <input type="text" id="value-strength" value="0" class="demo-input" style="width:30px;"/></div>
+<input type="range" min="0" max="100" id='slider-strength' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+
+<div>Grey level: <input type="text" id="value-greyLevel" value="0" class="demo-input" style="width:30px;"/></div>
+<input type="range" min="0" max="100" id='slider-greyLevel' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+
+<script type="text/javascript"><!--
+$(document).ready(function(){
+	var $sliderGreyLevel = $("#slider-greyLevel").on('input', function() {
+		$("#value-greyLevel").val(Math.round($sliderGreyLevel.val() / 100 * 255));
+	});
+
+	var $sliderStrength = $("#slider-strength").on('input', function() {
+		$("#value-strength").val(($sliderStrength.val() / 100 * 10).toFixed(1));
+	});
+});
+--></script>
+Direction:
+<select id="value-direction" class="demo-select">
+<option value="topleft">Top left</option>
+<option value="top">Top</option>
+<option value="topright">Top right</option>
+<option value="right">Right</option>
+<option value="bottomright">Bottom right</option>
+<option value="bottom">Bottom</option>
+<option value="bottomleft">Bottom left</option>
+<option value="left">Left</option>
+</select><br/>
+
+<div>Blend with original: <input type="checkbox" id="value-blend" class="demo-checkbox"/></div>
+
+<input type="button" onclick="demo();" value="Emboss"/>
+<input type="button" onclick="resetDemo();" value="Reset"/><br/>
+
+</div>
+
+<img src="/sample/Butterfly.jpg" id="demoimage" style="margin-top:5px;" alt=""/>
+</div></div>
+	<div id="tabexamplecode">
+		<h3>Example usage</h3><div class="code"><pre class="javascript">
+var img = new Image();
+img.onload = function() {
+	Pixastic.process(img, "emboss", {greyLevel:100,direction:"topright"});
+}
+document.body.appendChild(img);
+img.src = "myimage.jpg";
+</pre></div></div>
+	<div id="tabparameters">
+		<h3>Parameters</h3><ul class="action-options-list"><li><span class='option-desc'><span class='option-name'>strength</span> (<span class='option-type'>float</span>)<br/>The strength of the effect. Value between 0 and 10.</span></li><li><span class='option-desc'><span class='option-name'>greyLevel</span> (<span class='option-type'>int</span>)<br/>The standard level of grey in the final image. A value between 0 and 255. Defaults to 180.</span></li><li><span class='option-desc'><span class='option-name'>direction</span> (<span class='option-type'>string</span>)<br/>The "direction" of the light source. One of "topleft", "top", "topright", "right", "bottomright", "bottom", "bottomleft" or "left".</span></li><li><span class='option-desc'><span class='option-name'>blend</span> (<span class='option-type'>bool</span>)<br/>If true, the embossed image will be blended with the original image rather than producing a greyscale image.</span></li></ul>	</div></div>
+
+<p class="view-source">View source: <a href="/lib/git/pixastic/actions/emboss.js" class="view-source-link">emboss.js</a></p>
+
+<h3>Browser support</h3>
+<p>
+<script type="text/javascript"><!--
+
+var clients = [
+	{
+		name : "Internet Explorer 5.5+",
+		icon : "icon_ie7.png",
+		link : "http://www.microsoft.com/windows/products/winfamily/ie/default.mspx",
+		hasCanvas : function() { return false },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return true }
+	},
+	{
+		name : "Opera 9+",
+		icon : "icon_opera.png",
+		link : "http://www.opera.com/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { this.name = "Opera 9.5+"; return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Firefox 2+",
+		icon : "icon_firefox.png",
+		link : "http://www.mozilla.com/firefox/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Safari 3+",
+		icon : "icon_safari.png",
+		link : "http://www.apple.com/safari/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return false }
+	},
+	{
+		name : "WebKit Nightly",
+		icon : "icon_webkit.png",
+		link : "http://nightly.webkit.org/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	}
+];
+
+var realClient = Pixastic.Client;
+var action = Pixastic.Actions["emboss"];
+
+for (var i=0;i<clients.length;i++) {
+	var client = clients[i];
+	Pixastic.Client = client;
+	if (action.checkSupport()) {
+		document.write(
+			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+			+ client.name + "</a></span>"
+		);
+	}
+}
+
+Pixastic.Client = realClient;
+
+--></script>
+
+</p>
