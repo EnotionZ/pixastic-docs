@@ -32,13 +32,11 @@ function demo() {
 
 <div>Amount: <input type="text" id="value-amount" value="0" class="demo-input" style="width:30px;"/></div>
 <input id='slider-amount' type='range' min="0" max="100" class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
-	<div class="ui-slider-handle"></div><div class="ui-slider-range"></div>
-</div>
 
 
 <script type="text/javascript"><!--
 $(document).ready(function(){
-	var $slider = $("#slider-amount").change(function() {
+	var $slider = $("#slider-amount").on('input', function() {
 		var amount = ($slider.val() / 100).toFixed(1);
 		$("#value-amount").val(amount);
 	});

@@ -1,0 +1,140 @@
+---
+layout: page
+sidebar: false
+---
+
+<h1 class="action-header"><a href="/lib/docs/">Documentation</a>: Pointillize</h1>
+<h3>Description</h3>
+
+<p class="action-description">This action paints the picture with circular points. Processing time increases drastically with small radii and/or high densities.</p>
+
+<div id="actiontabs">
+	<ul>
+		<li><a href="#tabdemo"><span>Demo</span></a></li>
+		<li><a href="#tabexamplecode"><span>Example code</span></a></li>
+		<li><a href="#tabparameters"><span>Parameters</span></a></li><li><a href="#tabissues"><span>Known issues</span></a></li>	</ul>
+	<div id="tabdemo">
+
+		<h3>Demo</h3><div class="actiondemo">
+<script type="text/javascript"><!--
+function demo() {
+	Pixastic.process(document.getElementById("demoimage"), "pointillize", {
+		radius : $("#value-radius").val(),
+		density : $("#value-density").val(),
+		noise : $("#value-noise").val(),
+		transparent : $("#value-transparent").attr("checked")
+	});
+}
+
+$(document).ready(function(){
+	var $sliderRadius = $("#slider-radius").on('input', function() {
+		$("#value-radius").val( Math.max(1,$sliderRadius.val()) );
+	});
+	var $sliderDensity = $("#slider-density").on('input', function() {
+		$("#value-density").val( ($sliderDensity.val()/100*5).toFixed(1) );
+	});
+	var $sliderNoise = $("#slider-noise").on('input', function() {
+		$("#value-noise").val(($sliderNoise.val()/100*2).toFixed(1));
+	});
+});
+
+--></script>
+
+<div class="demo-options">
+
+<div>Point radius: <input type="text" id="value-radius" value="0" class="demo-input" style="width:30px;"/></div>
+<input type="range" min="0" max="100" id='slider-radius' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+
+<div>Density: <input type="text" id="value-density" value="0" class="demo-input" style="width:30px;"/></div>
+<input type="range" min="0" max="100" id='slider-density' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+
+<div>Noise: <input type="text" id="value-noise" value="0" class="demo-input" style="width:30px;"/></div>
+<input type="range" min="0" max="100" id='slider-noise' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+
+<div>Transparent background: <input type="checkbox" id="value-transparent" class="demo-checkbox"/></div>
+
+<input type="button" onclick="demo();" value="Pointillize"/>
+<input type="button" onclick="resetDemo();" value="Reset"/><br/>
+</div>
+<img src="/sample/Wildebeest.jpg" id="demoimage" style="margin-top:5px;" alt=""/>
+</div></div>
+	<div id="tabexamplecode">
+		<h3>Example usage</h3><div class="code"><pre class="javascript">
+var img = new Image();
+img.onload = function() {
+	Pixastic.process(img, "pointillize", {radius:5, density:1.5, noise:1.0, transparent:false});
+}
+document.body.appendChild(img);
+img.src = "myimage.jpg";
+</pre></div></div>
+	<div id="tabparameters">
+		<h3>Parameters</h3><ul class="action-options-list"><li><span class='option-desc'><span class='option-name'>radius</span> (<span class='option-type'>int</span>)<br/>Radius of the points, value greater than 1.</span></li><li><span class='option-desc'><span class='option-name'>density</span> (<span class='option-type'>float</span>)<br/>Density of the points. Value from 0 to 5. A value of 1 gives a total of (width * height / diameter) points.</span></li><li><span class='option-desc'><span class='option-name'>noise</span> (<span class='option-type'>float</span>)<br/>Noise in the distribution of the points, value equal to or greater than 0.</span></li><li><span class='option-desc'><span class='option-name'>transparent</span> (<span class='option-type'>bool</span>)<br/>If true, the points will be painted on a transparent background, otherwise they are painted on top of the original image.</span></li></ul>	</div><div id="tabissues"><h3>Known issues</h3><ul class="action-issues-list"><li><span class='issue-desc'>Since the points are painted in order top to bottom, left to right, a "layering" effect can be seen when using high densities.</span></li></ul></div></div>
+
+<p class="view-source">View source: <a href="/lib/git/pixastic/actions/pointillize.js" class="view-source-link">pointillize.js</a></p>
+
+<h3>Browser support</h3>
+<p>
+<script type="text/javascript"><!--
+
+var clients = [
+	{
+		name : "Internet Explorer 5.5+",
+		icon : "icon_ie7.png",
+		link : "http://www.microsoft.com/windows/products/winfamily/ie/default.mspx",
+		hasCanvas : function() { return false },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return true }
+	},
+	{
+		name : "Opera 9+",
+		icon : "icon_opera.png",
+		link : "http://www.opera.com/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { this.name = "Opera 9.5+"; return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Firefox 2+",
+		icon : "icon_firefox.png",
+		link : "http://www.mozilla.com/firefox/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Safari 3+",
+		icon : "icon_safari.png",
+		link : "http://www.apple.com/safari/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return false }
+	},
+	{
+		name : "WebKit Nightly",
+		icon : "icon_webkit.png",
+		link : "http://nightly.webkit.org/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	}
+];
+
+var realClient = Pixastic.Client;
+var action = Pixastic.Actions["pointillize"];
+
+for (var i=0;i<clients.length;i++) {
+	var client = clients[i];
+	Pixastic.Client = client;
+	if (action.checkSupport()) {
+		document.write(
+			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+			+ client.name + "</a></span>"
+		);
+	}
+}
+
+Pixastic.Client = realClient;
+
+--></script>
+
+</p>
