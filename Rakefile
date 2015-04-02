@@ -76,14 +76,30 @@ task :watch do
   [jekyllPid, compassPid].each { |pid| Process.wait(pid) }
 end
 
+def local_ip
+  orig, Socket.do_not_reverse_lookup = Socket.do_not_reverse_lookup, true
+   UDPSocket.open do |s|
+      s.connect '64.233.187.99', 1
+      s.addr.last
+   end
+ensure
+   Socket.do_not_reverse_lookup = orig
+end
+
 desc "preview the site in a web browser"
-task :preview do
+task :preview, :host do |t, args|
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   puts "Starting to watch source with Jekyll and Compass. Starting Rack on port #{server_port}"
   system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
   jekyllPid = Process.spawn({"OCTOPRESS_ENV"=>"preview"}, "jekyll build --watch")
   compassPid = Process.spawn("compass watch")
-  rackupPid = Process.spawn("rackup --port #{server_port}")
+  if args.host
+    host = args.host
+  else
+    host = local_ip
+  end
+  puts "using host: #{host}"
+  rackupPid = Process.spawn("rackup --host #{host} --port #{server_port}")
 
   trap("INT") {
     [jekyllPid, compassPid, rackupPid].each { |pid| Process.kill(9, pid) rescue Errno::ESRCH }
