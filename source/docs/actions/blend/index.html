@@ -1,0 +1,170 @@
+---
+layout: page
+sidebar: false
+---
+
+
+<h1 class="action-header"><a href="/">Documentation</a>: Blend</h1>
+<h3>Description</h3>
+
+<p class="action-description">This action lets you blend two images using different blend modes like the ones available in Photoshop (multiply, screen, exclusion, difference, etc.). You can use either an <code>img</code> element or a <code>canvas</code> element for the "blend image". It expects the images to be the same size but will simply crop the blend image if it's too large or leave untouched areas if it's smaller then the base image.</p>
+
+<div id="actiontabs">
+	<ul>
+		<li><a href="#tabdemo"><span>Demo</span></a></li>
+		<li><a href="#tabexamplecode"><span>Example code</span></a></li>
+		<li><a href="#tabparameters"><span>Parameters</span></a></li>	</ul>
+	<div id="tabdemo">
+
+		<h3>Demo</h3><div class="actiondemo">
+<script type="text/javascript">
+function demo() {
+	Pixastic.process(document.getElementById("demoimage"), "blend", {
+		amount : $("#value-amount").val(),
+		mode : $("#value-mode").val(),
+		image : $("#blendimage").get(0)
+	});
+}
+
+</script>
+
+<div class="demo-options">
+
+<div>Amount: <input type="text" id="value-amount" value="0" class="demo-input" style="width:30px;"/></div>
+<input id='slider-amount' type='range' min="0" max="100" class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+	<div class="ui-slider-handle"></div><div class="ui-slider-range"></div>
+</div>
+
+
+<script type="text/javascript"><!--
+$(document).ready(function(){
+	var $slider = $("#slider-amount").change(function() {
+		var amount = ($slider.val() / 100).toFixed(1);
+		$("#value-amount").val(amount);
+	});
+});
+--></script>
+Mode:
+<select id="value-mode" class="demo-select">
+<option value="normal">Normal</option>
+<option value="multiply">Multiply</option>
+<option value="lighten">Lighten</option>
+<option value="darken">Darken</option>
+<option value="darkercolor">Darker Color</option>
+<option value="lightercolor">Lighter Color</option>
+<option value="difference">Difference</option>
+<option value="screen">Screen</option>
+<option value="exclusion">Exclusion</option>
+<option value="overlay">Overlay</option>
+<option value="softlight">Soft Light</option>
+<option value="hardlight">Hard Light</option>
+<option value="colordodge">Color Dodge</option>
+<option value="colorburn">Color Burn</option>
+<option value="lineardodge">Linear Dodge</option>
+<option value="linearburn">Linear Burn</option>
+<option value="linearlight">Linear Light</option>
+<option value="vividlight">Vivid Light</option>
+<option value="pinlight">Pin Light</option>
+<option value="hardmix">Hard Mix</option>
+</select><br/>
+
+<input type="button" onclick="demo();" value="Blend"/>
+<input type="button" onclick="resetDemo();" value="Reset"/><br/>
+
+<br/>
+Blend image:<br/>
+<img src="/sample/Flower.jpg" id="blendimage" style="margin-top:5px;width:150px;" alt=""/>
+
+</div>
+
+<img src="/sample/Butterfly.jpg" id="demoimage" style="margin-top:5px;" alt=""/></div></div>
+	<div id="tabexamplecode">
+		<h3>Example usage</h3><div class="code"><pre class="javascript">
+var img = new Image();
+img.onload = function() {
+	var blendImg = new Image();
+	blendImg.onload = function() {
+		Pixastic.process(img, "blend", 
+			{
+				amount : 1, 
+				mode : "multiply", 
+				image : blendImg
+			}
+		);
+	}
+	blendImg.src = "blendimage.jpg";
+}
+img.src = "myimage.jpg";
+</pre></div></div>
+	<div id="tabparameters">
+		<h3>Parameters</h3><ul class="action-options-list"><li><span class='option-desc'><span class='option-name'>amount</span> (<span class='option-type'>float</span>)<br/>Amount of the image to blend. Value between 0 and 1.</span></li><li><span class='option-desc'><span class='option-name'>mode</span> (<span class='option-type'>string</span>)<br/>The blend mode. One of "normal", "multiply", "lighten", "darken", "lightercolor", "darkercolor", "difference", "screen", "exclusion", "overlay", "softlight", "hardlight", "colordodge", "colorburn", "lineardodge", "linearburn", "linearlight", "vividlight", "pinlight", "hardmix".</span></li><li><span class='option-desc'><span class='option-name'>image</span> (<span class='option-type'>image</span>)<br/>Image element to blend with original image.</span></li></ul>	</div></div>
+
+<p class="view-source">View source: <a href="/web/20140701115210/http://www.pixastic.com/lib/git/pixastic/actions/blend.js" class="view-source-link">blend.js</a></p>
+
+<h3>Browser support</h3>
+<p>
+<script type="text/javascript"><!--
+
+var clients = [
+	{
+		name : "Internet Explorer 5.5+",
+		icon : "icon_ie7.png",
+		link : "/web/20140701115210/http://www.microsoft.com/windows/products/winfamily/ie/default.mspx",
+		hasCanvas : function() { return false },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return true }
+	},
+	{
+		name : "Opera 9+",
+		icon : "icon_opera.png",
+		link : "/web/20140701115210/http://www.opera.com/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { this.name = "Opera 9.5+"; return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Firefox 2+",
+		icon : "icon_firefox.png",
+		link : "/web/20140701115210/http://www.mozilla.com/firefox/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Safari 3+",
+		icon : "icon_safari.png",
+		link : "/web/20140701115210/http://www.apple.com/safari/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return false }
+	},
+	{
+		name : "WebKit Nightly",
+		icon : "icon_webkit.png",
+		link : "/web/20140701115210/http://nightly.webkit.org/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	}
+];
+
+var realClient = Pixastic.Client;
+var action = Pixastic.Actions["blend"];
+
+for (var i=0;i<clients.length;i++) {
+	var client = clients[i];
+	Pixastic.Client = client;
+	if (action.checkSupport()) {
+		document.write(
+			"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+			+ client.name + "</a></span>"
+		);
+	}
+}
+
+Pixastic.Client = realClient;
+
+--></script>
+
+</p>
+      </div>

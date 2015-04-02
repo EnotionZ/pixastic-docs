@@ -97,7 +97,7 @@ var actions = [
 for (var i=0;i<actions.length;i++) {
 	var action = actions[i];
 	document.write(
-		"<a href=\"/lib/docs/actions/" + action[0] + "/\" class=\"docactionlist\">" + action[1] + "</a>"
+		"<a href=\"/docs/actions/" + action[0] + "/\" class=\"docactionlist\">" + action[1] + "</a>"
 	);
 }
 --></script>
@@ -223,9 +223,9 @@ Note that this procedure has changed recently with pixastic.core.js version 0.1.
 </p>
 <script src="lib/actions/invert.js" type="text/javascript"></script>
 <p>Original image:</p>
-<p><img src="http://localhost:4000/sample/Wildebeest.jpg" class="" alt=""/></p>
+<p><img src="/sample/Wildebeest.jpg" class="" alt=""/></p>
 <p>Image with <code>class="pixastic pixastic-invert(rect=50,50,150,150)"</code>:</p>
-<p><img src="http://localhost:4000/sample/Wildebeest.jpg" class="pixastic pixastic-invert(rect=50,50,150,150)" alt=""/></p>
+<p><img src="/sample/Wildebeest.jpg" class="pixastic pixastic-invert(rect=50,50,150,150)" alt=""/></p>
 
 <h3><a name="jquery"></a>jQuery <span class="top-link"><a href="#top">[top]</a></span></h3>
 <p>
@@ -251,7 +251,7 @@ As you might have guessed, the jQuery plugin is basically a very thin wrapper fo
 </p>
 
 <p>Image changed with jQuery:</p>
-<p><img src="http://localhost:4000/sample/Wildebeest.jpg" id="jqueryimage" class="testimage" alt=""/></p>
+<p><img src="/sample/Wildebeest.jpg" id="jqueryimage" class="testimage" alt=""/></p>
 <script type="text/javascript" src="lib/pixastic.jquery.js"></script>
 <script type="text/javascript" src="lib/actions/emboss.js"></script>
 <script type="text/javascript" src="lib/actions/blurfast.js"></script>
