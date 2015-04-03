@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Pixastic Docs]]></title>
+  <link href="http://enotionz.github.io/pixastic-docs/atom.xml" rel="self"/>
+  <link href="http://enotionz.github.io/pixastic-docs/"/>
+  <updated>2015-04-03T01:41:16-07:00</updated>
+  <id>http://enotionz.github.io/pixastic-docs/</id>
+  <author>
+    <name><![CDATA[Jacob Seidelin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>

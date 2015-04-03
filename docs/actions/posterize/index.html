@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pixastic Docs</title>
+  <meta name="author" content="Jacob Seidelin">
+
+  
+  <meta name="description" content="Documentation: Posterize
+Description This action reduces the number of colours to a specified number of levels, creating a posterize effect. Demo &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://enotionz.github.io/pixastic-docs/docs/actions/posterize/">
+  <link href="/pixastic-docs/favicon.png" rel="icon">
+  <link href="/pixastic-docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Pixastic Docs" type="application/atom+xml">
+  <script src="/pixastic-docs/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/pixastic-docs/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script type="text/javascript"><!--
+var cookies = [];
+var cookiesRaw = document.cookie.split("; ");
+for (var i=0;i<cookiesRaw.length;i++) {
+	var cookie = cookiesRaw[i].split("=");
+	cookies[cookie[0]] = cookie[1];
+}
+function setCookie(name, value) {
+	document.cookie = name+"="+value+"; path=/";
+	cookies[name] = value;
+}
+
+var pixastic_parseonload = true;
+
+function resetDemo() {
+	Pixastic.revert(document.getElementById("demoimage"));
+}
+</script>
+<script type="text/javascript" src="/pixastic-docs/lib/download/pixastic.js"></script>
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/pixastic-docs/">Pixastic Docs</a></h1>
+  
+    <h2>JavaScript Image Processing Library</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="enotionz.github.io/pixastic-docs">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/pixastic-docs/" id="root_url">Documentation</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <h1 class="action-header"><a href="/pixastic-docs/lib/docs/">Documentation</a>: Posterize</h1>
+<h3>Description</h3>
+
+<p class="action-description">This action reduces the number of colours to a specified number of levels, creating a posterize effect.</p>
+
+<div id="actiontabs">
+	<ul>
+		<li><a href="#tabdemo"><span>Demo</span></a></li>
+		<li><a href="#tabexamplecode"><span>Example code</span></a></li>
+		<li><a href="#tabparameters"><span>Parameters</span></a></li>	</ul>
+	<div id="tabdemo">
+
+		<h3>Demo</h3><div class="actiondemo">
+<script type="text/javascript"><!--
+function demo() {
+	Pixastic.process(document.getElementById("demoimage"), "posterize", {
+		levels : $("#value-levels").val()
+	});
+}
+
+$(document).ready(function(){
+	var $sliderLevels = $("#slider-levels").on('input', function() {
+		$("#value-levels").val(Math.max(1,Math.round($sliderLevels.val() / 100 * 32)));
+	});
+});
+
+--></script>
+
+
+<div class="demo-options">
+
+<div>Levels: <input type="text" id="value-levels" value="0" class="demo-input" style="width:30px;"/></div>
+<input type="range" min="0" max="100" id='slider-levels' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+
+<input type="button" onclick="demo();" value="Posterize"/>
+<input type="button" onclick="resetDemo();" value="Reset"/><br/>
+
+</div>
+
+<img src="/pixastic-docs/sample/Butterfly.jpg" id="demoimage" style="margin-top:5px;" alt=""/>
+</div></div>
+	<div id="tabexamplecode">
+		<h3>Example usage</h3><div class="code"><pre class="javascript">
+var img = new Image();
+img.onload = function() {
+	Pixastic.process(img, "posterize", {levels:10});
+}
+document.body.appendChild(img);
+img.src = "myimage.jpg";
+</pre></div></div>
+	<div id="tabparameters">
+		<h3>Parameters</h3><ul class="action-options-list"><li><span class='option-desc'><span class='option-name'>levels</span> (<span class='option-type'>int</span>)<br/>Number of levels, 0 to 255</span></li></ul>	</div></div>
+
+<p class="view-source">View source: <a href="/pixastic-docs/lib/git/pixastic/actions/posterize.js" class="view-source-link">posterize.js</a></p>
+
+<h3>Browser support</h3>
+<p>
+<script type="text/javascript"><!--
+
+var clients = [
+	{
+		name : "Internet Explorer 5.5+",
+		icon : "icon_ie7.png",
+		link : "http://www.microsoft.com/windows/products/winfamily/ie/default.mspx",
+		hasCanvas : function() { return false },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return true }
+	},
+	{
+		name : "Opera 9+",
+		icon : "icon_opera.png",
+		link : "http://www.opera.com/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { this.name = "Opera 9.5+"; return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Firefox 2+",
+		icon : "icon_firefox.png",
+		link : "http://www.mozilla.com/firefox/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	},
+	{
+		name : "Safari 3+",
+		icon : "icon_safari.png",
+		link : "http://www.apple.com/safari/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return false },
+		isIE : function() { return false }
+	},
+	{
+		name : "WebKit Nightly",
+		icon : "icon_webkit.png",
+		link : "http://nightly.webkit.org/",
+		hasCanvas : function() { return true },
+		hasCanvasImageData : function() { return true },
+		isIE : function() { return false }
+	}
+];
+
+var realClient = Pixastic.Client;
+var action = Pixastic.Actions["posterize"];
+
+for (var i=0;i<clients.length;i++) {
+	var client = clients[i];
+	Pixastic.Client = client;
+	if (action.checkSupport()) {
+		document.write(
+		"<span class=\"actionbrowsersupport\"><a href=\"" + client.link + "\" target=\"_blank\"><img src=\"/lib/" + client.icon + "\" alt=\"" + client.name + "\" title=\"" + client.name + "\">"
+			+ client.name + "</a></span>"
+		);
+	}
+}
+
+Pixastic.Client = realClient;
+
+--></script>
+
+</p>
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Pixastic Library created by Jacob Seidelin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

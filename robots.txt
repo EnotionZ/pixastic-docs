@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://enotionz.github.io/pixastic-docs/sitemap.xml 
