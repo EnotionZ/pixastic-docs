@@ -61,7 +61,9 @@ These pages also feature small live demos where you can see the library in actio
 </p>
 
 <p>
+
 <script type="text/javascript"><!--
+var rootUrl = document.getElementById('root_url').href;
 var actions = [
 	["blend", "Blend"],
 	["blur", "Blur"],
@@ -96,7 +98,7 @@ var actions = [
 
 for (var i=0;i<actions.length;i++) {
 	var action = actions[i];
-	document.write("<a href=\"{{ root_url }}/docs/actions/" + action[0] + "/\" class=\"docactionlist\">" + action[1] + "</a>");
+	document.write('<a href="' + rootUrl + 'docs/actions/' + action[0] + '/" class="docactionlist">' + action[1] + '</a>');
 }
 --></script>
 
